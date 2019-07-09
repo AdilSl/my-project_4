@@ -1,0 +1,32 @@
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">nom</th>
+        <th scope="col">description</th>
+        <th scope="col">prix</th>
+        <th scope="col">tailles</th>
+        <th scope="col">couleur</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for list in lists %}
+    <tr>
+        <th scope="row">{{ list.nom }}</th>
+        <td>{{  list.description }}</td>
+        <td>{{ list.prix }}</td>
+
+        {% for taille in list.tailles %}
+            <td>{{ taille.taille }}</td>
+        {% endfor %}
+
+        <td><a role="button" href="{{ path('chaussure_edit',{id:list.id}) }}">edite</a></td>
+
+        {% for couleur in list.couleurs %}
+            <td>{{ couleur.couleur }}</td>
+        {% endfor %}
+
+
+    </tr>
+    {% endfor%}
+    </tbody>
+</table>

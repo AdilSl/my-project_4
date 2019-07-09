@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        li *{
+            display:inline-block;
+            margin:0 10px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+{#    hellow {{ app.user.username }}#}
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.couleurs) }}
+    <ul class="tags" data-prototype="{{ form_widget(form.tailles.vars.prototype)|e('html_attr') }}">
+        {% for tag in form.tailles %}
+            <li>{{ form_row(tag) }}</li>
+        {% endfor %}
+    </ul>
+    <input type="submit" Value='{{ button }}'>
+    {{ form_end(form) }}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="section">
+            <a  href="{{ path('admin_post_edit', {id: post.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit_post'|trans }}
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

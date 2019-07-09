@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        li *{
+            display:inline-block;
+            margin:0 10px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.fonction) }}
+
+    <ul class="tags" data-prototype="{{ form_widget(form.taches.vars.prototype)|e('html_attr') }}">
+        {% for tag in form.taches %}
+            <li>{{ form_row(tag) }}</li>
+        {% endfor %}
+    </ul>
+
+    <input type="submit" Value='{{ button }}'>
+
+        <a  href="{{ path('chaussure_edit', {id: '1'}) }}">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+        </a>
+    {{ form_end(form) }}
+{#    {% if is_granted('AnonymousToken') %}#}
+
+{#    {% endif %}#}
+{% endblock %}
